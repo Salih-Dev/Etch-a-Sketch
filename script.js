@@ -1,25 +1,43 @@
 const container = document.querySelector("#container");
+const button = document.querySelector("button");
 
 function createSquares(number) {
-    for (let i = 0; i < 16 * 16; i++) {
+
+    container.innerHTML = "";
+
+    const sizePercentage = 100 / number;
+
+    for (let i = 0; i < number * number; i++) {
         const div = document.createElement("div");
         div.classList.add("grid-square");
-        container.appendChild(div);
+
+        div.style.flex =  `0 0 ${sizePercentage}%`;
+        div.style.height = `${sizePercentage}%`;
+
         div.addEventListener("mouseenter", () => {
             div.style.backgroundColor = "blue";
         });
+
+        container.appendChild(div);
     };
 };
 
+createSquares(16);
 
-const button = document.querySelector("button");
 
 button.addEventListener("click", () => {
-    let response = prompt("Enter number of squares per side(1-100): ");
+    let response = prompt("Enter number of squares per side (1-100): ");
 
-    if (response > 100) {
-        alert("Please enter an intiger between 1 and 100")
+    if (response === null) {
+        return;
     }
 
-    createSquares(response);
+    const gridSize = parseInt(response, 10);
+
+    if (isNaN(gridSize) || gridSize < 1 || gridSize > 100) {
+        alert("Please enter a valid integer between 1 and 100.");
+        return;
+    }
+
+    createSquares(gridSize);
 });
