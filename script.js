@@ -1,6 +1,17 @@
 const container = document.querySelector("#container");
 const button = document.querySelector("button");
 
+function getRandomColor() {
+  // Generate random integers between 0 and 255
+  const r = Math.floor(Math.random() * 256);
+  const g = Math.floor(Math.random() * 256);
+  const b = Math.floor(Math.random() * 256);
+  
+  // Return the RGB string format
+  return `rgb(${r}, ${g}, ${b})`;
+}
+
+
 function createSquares(number) {
 
     container.innerHTML = "";
@@ -15,7 +26,7 @@ function createSquares(number) {
         div.style.height = `${sizePercentage}%`;
 
         div.addEventListener("mouseenter", () => {
-            div.style.backgroundColor = "blue";
+            div.style.backgroundColor = getRandomColor();
         });
 
         container.appendChild(div);
